@@ -55,4 +55,31 @@ public class EventServiceImpl implements EventService {
 
         return response;
     }
+
+    @Override
+    public EventResponseDTO updateEvent(Long id, EventRequestDTO dto) {
+
+        Event event = repository.findById(id)
+                .orElseThrow(() -> new EventNotFoundException(
+                        "Event not found with id " + id));
+
+        event.setTitle(dto.getTitle());
+        event.setDescription(dto.getDescription());
+        event.setLocation(dto.getLocation());
+        event.setEventDate(dto.getEventDate());
+        event.setOrganizer(dto.getOrganizer());
+
+        Event updated = repository.save(event);
+
+        EventResponseDTO response = new EventResponseDTO();
+        response.setId(updated.getId());
+        response.setTitle(updated.getTitle());
+        response.setDescription(updated.getDescription());
+        response.setLocation(updated.getLocation());
+        response.setEventDate(updated.getEventDate());
+        response.setOrganizer(updated.getOrganizer());
+
+        return response;
+    }
+
 }

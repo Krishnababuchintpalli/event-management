@@ -8,4 +8,6 @@ public interface EventService {
     EventResponseDTO createEvent(EventRequestDTO dto);
 
     EventResponseDTO getEventById(Long id);
+
+    EventResponseDTO updateEvent(Long id, EventRequestDTO dto);
 }

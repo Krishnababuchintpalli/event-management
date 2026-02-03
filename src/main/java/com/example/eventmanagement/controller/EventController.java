@@ -18,6 +18,7 @@ public class EventController {
         this.service = service;
     }
 
+    // ✅ CREATE EVENT
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -26,12 +27,25 @@ public class EventController {
     public EventResponseDTO createEvent(
             @Valid @RequestBody EventRequestDTO dto) {
 
-        System.out.println("CREATE EVENT API HIT");
         return service.createEvent(dto);
     }
 
+    // ✅ GET EVENT BY ID
     @GetMapping("/{id}")
     public EventResponseDTO getEvent(@PathVariable Long id) {
         return service.getEventById(id);
+    }
+
+    // ✅ UPDATE EVENT
+    @PutMapping(
+            value = "/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public EventResponseDTO updateEvent(
+            @PathVariable Long id,
+            @Valid @RequestBody EventRequestDTO dto) {
+
+        return service.updateEvent(id, dto);
     }
 }
